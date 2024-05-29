@@ -8,22 +8,29 @@ form.addEventListener("submit", async (event) => {
   const username = usernameInput.value;
   const password = passwordInput.value;
 
-  const result = await fetch("http://localhost:8080/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ username, password }),
-  }).then((response) => response.json());
+  try {
+    const response = await fetch("http://localhost:8080/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
 
-  if (result.message.success) {
-    window.location.href = "/home.html"; // Điều hướng đến trang chủ
-  } else if (result.message.error) {
-    alert("Login failed");
-  } else {
-    alert("Unexpected response from server");
+    const result = await response.json();
+
+    if (result.message.success) {
+      window.location.href = "/home.html"; // Điều hướng đến trang chủ
+    } else if (result.message.error) {
+      alert("Login failed");
+    } else {
+      alert("Unexpected response from server");
+    }
+    console.log(result.message);
+  } catch (error) {
+    console.error("Error during login request:", error);
+    alert("An error occurred during the login request.");
   }
-  console.log(result.message);
 });
 
 // SignUp
@@ -41,20 +48,27 @@ SignupForm.addEventListener("submit", async (event) => {
   const password = SignupPasswordInput.value;
   const confirmpassword = SignupConfirmationInput.value;
 
-  const result = await fetch("http://localhost:8080/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ username, password, confirmpassword }),
-  }).then((response) => response.json());
+  try {
+    const response = await fetch("http://localhost:8080/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password, confirmpassword }),
+    });
 
-  if (result.message.success) {
-    window.location.href = "/home.html"; // Điều hướng đến trang chủ
-  } else if (result.message.error) {
-    alert("Login failed");
-  } else {
-    alert("Unexpected response from server");
+    const result = await response.json();
+
+    if (result.message.success) {
+      window.location.href = "/home.html"; // Điều hướng đến trang chủ
+    } else if (result.message.error) {
+      alert("Signup failed"); // Thay đổi thông báo để dễ phân biệt với đăng nhập
+    } else {
+      alert("Unexpected response from server");
+    }
+    console.log(result.message);
+  } catch (error) {
+    console.error("Error during signup request:", error);
+    alert("An error occurred during the signup request.");
   }
-  console.log(result.message);
 });

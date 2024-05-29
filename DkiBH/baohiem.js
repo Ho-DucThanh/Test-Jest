@@ -26,6 +26,15 @@ class BaoHiem {
   }
 
   calculateInsuranceCost() {
+    if (!this.isComplete()) {
+      throw new Error("Thông tin bảo hiểm không đầy đủ");
+    }
+    if (!this.isValidType()) {
+      throw new Error("Loại bảo hiểm không hợp lệ");
+    }
+    if (!this.isValidDuration()) {
+      throw new Error("Thời hạn bảo hiểm không hợp lệ");
+    }
     const costPerYear = this.type.toLowerCase() === "vip" ? 800000 : 500000;
     return costPerYear * this.duration;
   }
