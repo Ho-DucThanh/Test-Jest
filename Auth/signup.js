@@ -10,11 +10,15 @@ class Auth_UserSignUp {
   }
 
   isValidEmail() {
-    return this.email.includes("@gmail.com");
+    return this.email.includes("@gmail.com") && !this.email.includes(" ");
   }
 
   isValidPassword() {
-    return this.password.length >= 8;
+    return (
+      this.password.length >= 8 &&
+      this.password.length <= 20 &&
+      !this.password.includes(" ")
+    );
   }
 
   passwordsMatch() {

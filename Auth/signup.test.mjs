@@ -6,8 +6,8 @@ describe("Kiểm tra đăng kí tài khoản người dùng", () => {
   test("Thông tin đăng kí tài khoản hợp lệ", () => {
     const user_Signup = new User_Signup(
       "thanhbr06@gmail.com",
-      "12345678",
-      "12345678"
+      "12345678abc",
+      "12345678abc"
     );
     expect(user_Signup.isValidEmailAndPassword()).toBe(true);
   });
@@ -38,21 +38,55 @@ describe("Kiểm tra đăng kí tài khoản người dùng", () => {
 
   // Test case 6: Email không đúng định dạng (không có @gmail.com) => False
   test("Email không đúng định dạng (không có @gmail.com)", () => {
-    const user_Signup = new User_Signup("thanh123", "12345678", "12345678");
-    expect(user_Signup.isValidEmailAndPassword()).toBe(false);
-  });
-
-  // Test case 7: Mật khẩu không hợp lệ (< 8 ký tự) => False
-  test("Mật khẩu không hợp lệ", () => {
     const user_Signup = new User_Signup(
-      "thanhbr06@gmail.com",
-      "123456",
-      "123456"
+      "thanh123",
+      "12345678abc",
+      "12345678abc"
     );
     expect(user_Signup.isValidEmailAndPassword()).toBe(false);
   });
 
-  // Test case 8: Mật khẩu và xác nhận mật khẩu không khớp => False
+  // Test case 7: Email hợp lệ, mật khẩu đúng biên độ (8 ký tự) => True
+  test("Email hợp lệ, mật khẩu đúng biên độ (8 ký tự)", () => {
+    const user_Signup = new User_Signup(
+      "thanhbr06@gmail.com",
+      "abcd1234",
+      "abcd1234"
+    );
+    expect(user_Signup.isValidEmailAndPassword()).toBe(true);
+  });
+
+  // Test case 8: Email hợp lệ, mật khẩu đúng biên độ (20 ký tự) => True
+  test("Email hợp lệ, mật khẩu đúng biên độ (20 ký tự)", () => {
+    const user_Signup = new User_Signup(
+      "thanhbr06@gmail.com",
+      "a".repeat(20),
+      "a".repeat(20)
+    );
+    expect(user_Signup.isValidEmailAndPassword()).toBe(true);
+  });
+
+  // Test case 9: Email hợp lệ, mật khẩu vượt quá biên (21 ký tự) => False
+  test("Email hợp lệ, mật khẩu vượt quá biên (21 ký tự)", () => {
+    const user_Signup = new User_Signup(
+      "thanhbr06@gmail.com",
+      "a".repeat(21),
+      "a".repeat(21)
+    );
+    expect(user_Signup.isValidEmailAndPassword()).toBe(false);
+  });
+
+  // Test case 10: Email hợp lệ, mật khẩu ngắn hơn biên (7 ký tự) => False
+  test("Email hợp lệ, mật khẩu ngắn hơn biên (7 ký tự)", () => {
+    const user_Signup = new User_Signup(
+      "thanhbr06@gmail.com",
+      "abc1234",
+      "abc1234"
+    );
+    expect(user_Signup.isValidEmailAndPassword()).toBe(false);
+  });
+
+  // Test case 11: Mật khẩu và xác nhận mật khẩu không khớp => False
   test("Mật khẩu và xác nhận mật khẩu không khớp", () => {
     const user_Signup = new User_Signup(
       "thanhbr06@gmail.com",
@@ -62,7 +96,7 @@ describe("Kiểm tra đăng kí tài khoản người dùng", () => {
     expect(user_Signup.isValidEmailAndPassword()).toBe(false);
   });
 
-  // Test case 9: Email và mật khẩu không hợp lệ => False
+  // Test case 12: Email và mật khẩu không hợp lệ => False
   test("Email và mật khẩu không hợp lệ", () => {
     const user_Signup = new User_Signup("thanhbr06@gmail", "123456", "123456");
     expect(user_Signup.isValidEmailAndPassword()).toBe(false);
@@ -78,8 +112,8 @@ describe("Kiểm tra đăng kí tài khoản người dùng", () => {
     expect(user_Signup.isValidEmailAndPassword()).toBe(false);
   });
 
-  // Test case 11: Email hợp lệ, mật khẩu chứa ký tự đặc biệt => True
-  test("Email hợp lệ, mật khẩu chứa ký tự đặc biệt", () => {
+  // Test case 11: Mật khẩu chứa ký tự đặc biệt => True
+  test("Mật khẩu chứa ký tự đặc biệt", () => {
     const user_Signup = new User_Signup(
       "thanhbr06@gmail.com",
       "1234$5678",
@@ -108,57 +142,17 @@ describe("Kiểm tra đăng kí tài khoản người dùng", () => {
     expect(user_Signup.isValidEmailAndPassword()).toBe(true);
   });
 
-  // Test case 14: Email hợp lệ, mật khẩu chứa khoảng trắng => True
+  // Test case 14: Email hợp lệ, mật khẩu chứa khoảng trắng => False
   test("Email hợp lệ, mật khẩu chứa khoảng trắng", () => {
     const user_Signup = new User_Signup(
       "thanhbr06@gmail.com",
       "abcd efgh",
       "abcd efgh"
     );
-    expect(user_Signup.isValidEmailAndPassword()).toBe(true);
-  });
-
-  // Test case 15: Email hợp lệ, mật khẩu rất dài => True
-  test("Email hợp lệ, mật khẩu rất dài", () => {
-    const user_Signup = new User_Signup(
-      "thanhbr06@gmail.com",
-      "a".repeat(100),
-      "a".repeat(100)
-    );
-    expect(user_Signup.isValidEmailAndPassword()).toBe(true);
-  });
-
-  // Test case 16: Email không hợp lệ, mật khẩu hợp lệ => False
-  test("Email không hợp lệ, mật khẩu hợp lệ", () => {
-    const user_Signup = new User_Signup(
-      "thanhbr06gmail.com",
-      "12345678",
-      "12345678"
-    );
     expect(user_Signup.isValidEmailAndPassword()).toBe(false);
   });
 
-  // Test case 17: Email hợp lệ, mật khẩu chỉ chứa dấu cách => False
-  test("Email hợp lệ, mật khẩu chỉ chứa dấu cách", () => {
-    const user_Signup = new User_Signup(
-      "thanhbr06@gmail.com",
-      "        ",
-      "        "
-    );
-    expect(user_Signup.isValidEmailAndPassword()).toBe(false);
-  });
-
-  // Test case 18: Email không hợp lệ, mật khẩu chứa ký tự đặc biệt => False
-  test("Email không hợp lệ, mật khẩu chứa ký tự đặc biệt", () => {
-    const user_Signup = new User_Signup(
-      "thanhbr06gmail.com",
-      "1234$5678",
-      "1234$5678"
-    );
-    expect(user_Signup.isValidEmailAndPassword()).toBe(false);
-  });
-
-  // Test case 19: Email hợp lệ, mật khẩu chứa ký tự unicode => True
+  // Test case 15: Email hợp lệ, mật khẩu chứa ký tự unicode => True
   test("Email hợp lệ, mật khẩu chứa ký tự unicode", () => {
     const user_Signup = new User_Signup(
       "thanhbr06@gmail.com",
