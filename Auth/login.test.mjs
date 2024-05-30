@@ -8,6 +8,8 @@ describe("Kiểm tra tài khoản người dùng", () => {
     expect(user_Login.isValidEmailAndPassword()).toBe(true);
   });
 
+  // Thiếu trường thông tin
+
   // Test case 2: Tên đăng nhập bỏ trống => False
   test("Tên đăng nhập bỏ trống", () => {
     const user_Login = new Auth_User("", "12345678");
@@ -78,7 +80,7 @@ describe("Kiểm tra tài khoản người dùng", () => {
     expect(user_Login.isValidEmailAndPassword()).toBe(false);
   });
 
-  // Email hợp lệ, Mật khẩu không hợp lệ hoặc hợp lệ
+  // Email hợp lệ, Mật khẩu không hợp lệ
 
   // Test case 13: Email hợp lệ, mật khẩu chứa khoảng trắng => False
   test("Email hợp lệ, mật khẩu chứa khoảng trắng", () => {
@@ -86,33 +88,35 @@ describe("Kiểm tra tài khoản người dùng", () => {
     expect(user_Login.isValidEmailAndPassword()).toBe(false);
   });
 
-  // Test case 14: Email hợp lệ, mật khẩu chứa ký tự đặc biệt => True
-  test("Email hợp lệ, mật khẩu chứa ký tự đặc biệt", () => {
-    const user_Login = new Auth_User("thanhbr06@gmail.com", "1234$$5678");
-    expect(user_Login.isValidEmailAndPassword()).toBe(true);
-  });
-
-  // Test case 15: Email hợp lệ, mật khẩu chỉ chứa ký tự số => True
-  test("Email hợp lệ, mật khẩu chỉ chứa ký tự số", () => {
-    const user_Login = new Auth_User("thanhbr06@gmail.com", "12345678");
-    expect(user_Login.isValidEmailAndPassword()).toBe(true);
-  });
-
-  // Test case 16: Email hợp lệ, mật khẩu chỉ chứa ký tự chữ => True
-  test("Email hợp lệ, mật khẩu chỉ chứa ký tự chữ", () => {
-    const user_Login = new Auth_User("thanhbr06@gmail.com", "abcdefgh");
-    expect(user_Login.isValidEmailAndPassword()).toBe(true);
-  });
-
-  // Test case 17: Email hợp lệ, mật khẩu chỉ chứa dấu cách => False
+  // Test case 14: Email hợp lệ, mật khẩu chỉ chứa dấu cách => False
   test("Email hợp lệ, mật khẩu chỉ chứa dấu cách", () => {
     const user_Login = new Auth_User("thanhbr06@gmail.com", "        ");
     expect(user_Login.isValidEmailAndPassword()).toBe(false);
   });
 
-  // Test case 18: Email hợp lệ, mật khẩu chứa ký tự unicode => False
+  // Test case 15: Email hợp lệ, mật khẩu chứa ký tự unicode => False
   test("Email hợp lệ, mật khẩu chứa ký tự unicode", () => {
     const user_Login = new Auth_User("thanhbr06@gmail.com", "mậtkhẩu123");
     expect(user_Login.isValidEmailAndPassword()).toBe(false);
+  });
+
+  // Email hợp lệ, Mật khẩu hợp lệ
+
+  // Test case 16: Email hợp lệ, mật khẩu chứa ký tự đặc biệt => True
+  test("Email hợp lệ, mật khẩu chứa ký tự đặc biệt", () => {
+    const user_Login = new Auth_User("thanhbr06@gmail.com", "1234$$5678");
+    expect(user_Login.isValidEmailAndPassword()).toBe(true);
+  });
+
+  // Test case 17: Email hợp lệ, mật khẩu chỉ chứa ký tự số => True
+  test("Email hợp lệ, mật khẩu chỉ chứa ký tự số", () => {
+    const user_Login = new Auth_User("thanhbr06@gmail.com", "12345678");
+    expect(user_Login.isValidEmailAndPassword()).toBe(true);
+  });
+
+  // Test case 18: Email hợp lệ, mật khẩu chỉ chứa ký tự chữ => True
+  test("Email hợp lệ, mật khẩu chỉ chứa ký tự chữ", () => {
+    const user_Login = new Auth_User("thanhbr06@gmail.com", "abcdefgh");
+    expect(user_Login.isValidEmailAndPassword()).toBe(true);
   });
 });
