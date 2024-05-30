@@ -19,7 +19,7 @@ class User_Infor {
   }
 
   isValidAge(age) {
-    return Number.isInteger(age) && age > 0 && age < 120;
+    return Number.isInteger(age) && age > 0 && age < 101;
   }
 
   isValidSex(sex) {

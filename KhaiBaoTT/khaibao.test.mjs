@@ -14,169 +14,15 @@ describe("Khai báo thông tin đăng kí bảo hiểm", () => {
     expect(user.isValidUser()).toBe(true);
   });
 
-  // Test case 2: User không có đầy đủ thông tin => False
-  test("User không có đầy đủ thông tin", () => {
-    const user = new User_Infor("John Doe", 30, "", "0123456789", "");
-    expect(user.isValidUser()).toBe(false);
-  });
+  // Thiếu trường thông tin
 
-  // Test case 3: Tên User không hợp lệ => False
-  test("Tên User không hợp lệ", () => {
-    const user = new User_Infor(
-      "John Doe123",
-      30,
-      "Nam",
-      "0123456789",
-      "123 Street"
-    );
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 4: Tuổi User không hợp lệ (số nguyên và nằm trong khoảng từ (0, 120)) => False
-  test("Tuổi User không hợp lệ (số nguyên và nằm trong khoảng từ (0, 120))", () => {
-    const user = new User_Infor(
-      "John Doe",
-      120,
-      "Nam",
-      "0123456789",
-      "123 Street"
-    );
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 5: Giới tính không hợp lệ => False
-  test("Giới tính không hợp lệ", () => {
-    const user = new User_Infor(
-      "John Doe",
-      30,
-      "Other",
-      "0123456789",
-      "123 Street"
-    );
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 6: User có số điện thoại không hợp lệ (bắt đầu bằng số 0 và đủ 10 số) => False
-  test("User có số điện thoại không hợp lệ (bắt đầu bằng số 0 và đủ 10 số)", () => {
-    const user = new User_Infor(
-      "John Doe",
-      30,
-      "Nam",
-      "1234567890",
-      "123 Street"
-    );
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 7: Địa chỉ không hợp lệ => False
-  test("User có địa chỉ không hợp lệ", () => {
-    const user = new User_Infor(
-      "John Doe",
-      30,
-      "Nam",
-      "0123456789",
-      "123 Street!@#"
-    );
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 8: User có tất cả các thông tin không hợp lệ => False
-  test("User có tất cả các thông tin không hợp lệ", () => {
-    const user = new User_Infor(
-      "John Doe123",
-      40.5,
-      "Other",
-      "0123456",
-      "123 Street@@@"
-    );
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 9: User có 1 hoặc cùng lúc nhiều thông tin không hợp lệ => False
-  test("User có 1 hoặc cùng lúc nhiều thông tin không hợp lệ", () => {
-    const user = new User_Infor(
-      "John Doe",
-      40,
-      "Other",
-      "0123456789",
-      "123 Street@@@"
-    );
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 10: Tên chứa ký tự đặc biệt => False
-  test("Tên chứa ký tự đặc biệt", () => {
-    const user = new User_Infor(
-      "John@Doe",
-      30,
-      "Nam",
-      "0123456789",
-      "123 Street"
-    );
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 11: Tuổi là số âm => False
-  test("Tuổi là số âm", () => {
-    const user = new User_Infor(
-      "John Doe",
-      -5,
-      "Nam",
-      "0123456789",
-      "123 Street"
-    );
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 12: Số điện thoại có ký tự chữ => False
-  test("Số điện thoại có ký tự chữ", () => {
-    const user = new User_Infor(
-      "John Doe",
-      30,
-      "Nam",
-      "01234abcd9",
-      "123 Street"
-    );
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 13: Tên hợp lệ, tuổi hợp lệ, giới tính hợp lệ, số điện thoại hợp lệ, địa chỉ có dấu tiếng Việt => True
-  test("Thông tin hợp lệ, địa chỉ có dấu tiếng Việt", () => {
-    const user = new User_Infor(
-      "John Doe",
-      30,
-      "Nam",
-      "0123456789",
-      "123 Đường Số 1"
-    );
-    expect(user.isValidUser()).toBe(true);
-  });
-
-  // Test case 14: Tuổi là số thập phân => False
-  test("Tuổi là số thập phân", () => {
-    const user = new User_Infor(
-      "John Doe",
-      25.5,
-      "Nam",
-      "0123456789",
-      "123 Street"
-    );
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 15: Địa chỉ trống => False
-  test("Địa chỉ trống", () => {
-    const user = new User_Infor("John Doe", 30, "Nam", "0123456789", "");
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 16: Thiếu tên => False
-  test("Thiếu tên", () => {
+  // Test case 2: User thiếu tên
+  test("User thiếu tên", () => {
     const user = new User_Infor("", 30, "Nam", "0123456789", "123 Street");
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 17: Thiếu tuổi => False
+  // Test case 3: Thiếu tuổi => False
   test("Thiếu tuổi", () => {
     const user = new User_Infor(
       "John Doe",
@@ -188,28 +34,43 @@ describe("Khai báo thông tin đăng kí bảo hiểm", () => {
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 18: Thiếu giới tính => False
+  // Test case 4: Thiếu giới tính => False
   test("Thiếu giới tính", () => {
     const user = new User_Infor("John Doe", 30, "", "0123456789", "123 Street");
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 19: Thiếu số điện thoại => False
+  // Test case 5: Thiếu số điện thoại => False
   test("Thiếu số điện thoại", () => {
     const user = new User_Infor("John Doe", 30, "Nam", "", "123 Street");
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 20: Thiếu địa chỉ => False
-  test("Thiếu địa chỉ", () => {
+  // Test case 6: Thiếu địa chỉ => False
+  test("Thiếu Địa chỉ", () => {
     const user = new User_Infor("John Doe", 30, "Nam", "0123456789", "");
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 21: Tên chứa số => False
-  test("Tên chứa số", () => {
+  // Test case 7: User thiếu nhiều trường thông tin => False
+  test("User không có đầy đủ thông tin", () => {
+    const user = new User_Infor("", 30, "", "0123456789", "");
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Test case 7: User thiếu tất cả trường thông tin => False
+  test("User không có đầy đủ thông tin", () => {
+    const user = new User_Infor("", "", "", "", "");
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Check Thông tin không hợp lệ và thông tin hợp lệ
+
+  // Tên
+  // Test case 8: Tên User không hợp lệ (bao gồm chữ số hoặc kí tự đặc biệt)
+  test("Tên User không hợp lệ (bao gồm chữ số hoặc kí tự đặc biệt)", () => {
     const user = new User_Infor(
-      "John123 Doe",
+      "John Doe12!",
       30,
       "Nam",
       "0123456789",
@@ -218,11 +79,23 @@ describe("Khai báo thông tin đăng kí bảo hiểm", () => {
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 22: Tuổi vượt quá giới hạn => False
-  test("Tuổi vượt quá giới hạn", () => {
+  // Test case 9: Tên User bao gồm có dấu cách
+  test("Tên User bao gồm có dấu cách", () => {
     const user = new User_Infor(
-      "John Doe",
-      121,
+      "Ko Pin Yi",
+      30,
+      "Nam",
+      "0123456789",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(true);
+  });
+
+  // Test case 10: Tên User chỉ toàn là dấu cách
+  test("Tên User chỉ toàn là dấu cách", () => {
+    const user = new User_Infor(
+      "        ",
+      30,
       "Nam",
       "0123456789",
       "123 Street"
@@ -230,32 +103,190 @@ describe("Khai báo thông tin đăng kí bảo hiểm", () => {
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 23: Giới tính không hợp lệ => False
+  // Check tuổi
+
+  // Test case 11: Tuổi đúng biên => True
+  test("Tuổi User đúng bằng biên (biên 100)", () => {
+    const user = new User_Infor(
+      "John Doe",
+      100,
+      "Nam",
+      "0123456789",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(true);
+  });
+
+  // Test case 12: Tuổi đúng biên => True
+  test("Tuổi User đúng bằng biên (biên 1)", () => {
+    const user = new User_Infor(
+      "John Doe",
+      1,
+      "Nam",
+      "0123456789",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(true);
+  });
+
+  // Test case 13: Tuổi lớn hơn biên 100 => False
+  test("Tuổi User không hợp lệ (Lớn hơn biên)", () => {
+    const user = new User_Infor(
+      "John Doe",
+      101,
+      "Nam",
+      "0123456789",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Test case 14: Tuổi nhỏ hơn biên 1 => False
+  test("Tuổi User không hợp lệ (nhỏ hơn biên)", () => {
+    const user = new User_Infor(
+      "John Doe",
+      0,
+      "Nam",
+      "0123456789",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Test case 15: Tuổi User là số âm => False
+  test("Tuổi User không hợp lệ (số nguyên và nằm trong khoảng từ (0, 100))", () => {
+    const user = new User_Infor(
+      "John Doe",
+      -5,
+      "Nam",
+      "0123456789",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Test case 16: Tuổi User không phải là số nguyên dương => False
+  test("Tuổi User không hợp lệ (số nguyên và nằm trong khoảng từ (0, 100))", () => {
+    const user = new User_Infor(
+      "John Doe",
+      3.5,
+      "Nam",
+      "0123456789",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Giới tính
+
+  // Test case 17: Giới tính không được chọn => False
   test("Giới tính không hợp lệ", () => {
     const user = new User_Infor(
       "John Doe",
       30,
-      "Khác",
+      null,
       "0123456789",
       "123 Street"
     );
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 24: Số điện thoại không đủ 10 số => False
-  test("Số điện thoại không đủ 10 số", () => {
+  // Số điện thoại
+
+  // Test case 18: User có số điện thoại không hợp lệ (không bắt đầu bằng số 0) => False
+  test("User có số điện thoại không hợp lệ (không bắt đầu bằng số 0)", () => {
     const user = new User_Infor(
       "John Doe",
       30,
       "Nam",
-      "012345678",
+      "1234567890",
       "123 Street"
     );
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 25: Địa chỉ chứa ký tự đặc biệt => False
-  test("Địa chỉ chứa ký tự đặc biệt", () => {
+  // Test case 19: User có số điện thoại không hợp lệ (không đủ đủ 10 số) => False
+  test("User có số điện thoại không hợp lệ (không đủ đủ 10 số)", () => {
+    const user = new User_Infor("John Doe", 30, "Nam", "1234567", "123 Street");
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Test case 20: User có số điện thoại không hợp lệ (có kí tự đặc biệt hoặc chữ cái) => False
+  test("User có số điện thoại không hợp lệ (có kí tự đặc biệt hoặc chữ cái)", () => {
+    const user = new User_Infor(
+      "John Doe",
+      30,
+      "Nam",
+      "1234567ab!",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Test case 21: User có số điện thoại bằng giá trị biên (10 chữ số) => True
+  test("User có số điện thoại bằng giá trị biên (10 chữ số)", () => {
+    const user = new User_Infor(
+      "John Doe",
+      30,
+      "Nam",
+      "1234567ab!",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Test case 22: User có số điện thoại lơn hơn giá trị biên => False
+  test("User có số điện thoại bằng giá trị biên (10 chữ số)", () => {
+    const user = new User_Infor(
+      "John Doe",
+      30,
+      "Nam",
+      "12345678999",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Test case 23: User có số điện thoại có dấu cách => False
+  test("User có số điện thoại bằng giá trị biên (10 chữ số)", () => {
+    const user = new User_Infor(
+      "John Doe",
+      30,
+      "Nam",
+      "01234567 899",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Test case 24: User có số điện thoại chỉ toàn dấu cách => False
+  test("User có số điện thoại bằng giá trị biên (10 chữ số)", () => {
+    const user = new User_Infor(
+      "John Doe",
+      30,
+      "Nam",
+      "01234567 899",
+      "        "
+    );
+    expect(user.isValidUser()).toBe(false);
+  });
+
+  // Địa chỉ
+
+  // Test case 26: Địa chỉ Có dấu cách) => False
+  test("User có địa chỉ Địa chỉ Có dấu cách)", () => {
+    const user = new User_Infor(
+      "John Doe",
+      30,
+      "Nam",
+      "0123456789",
+      "123 Street"
+    );
+    expect(user.isValidUser()).toBe(true);
+  });
+
+  // Test case 27: Địa chỉ không hợp lệ (Có kí tự đặc biệt) => False
+  test("User có địa chỉ không hợp lệ (Có kí tự đặc biệt)", () => {
     const user = new User_Infor(
       "John Doe",
       30,
@@ -266,63 +297,41 @@ describe("Khai báo thông tin đăng kí bảo hiểm", () => {
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 26: Tên chứa dấu tiếng Việt => True
-  test("Tên chứa dấu tiếng Việt", () => {
-    const user = new User_Infor(
-      "Nguyễn Văn A",
-      30,
-      "Nam",
-      "0123456789",
-      "123 Street"
-    );
-    expect(user.isValidUser()).toBe(true);
-  });
-
-  // Test case 27: Địa chỉ chứa dấu tiếng Việt => True
-  test("Địa chỉ chứa dấu tiếng Việt", () => {
+  // Test case 28: Địa chỉ không hợp lệ (Chỉ toàn là dấu cách) => False
+  test("User có địa chỉ địa chỉ không hợp lệ (Chỉ toàn là dấu cách)", () => {
     const user = new User_Infor(
       "John Doe",
       30,
       "Nam",
       "0123456789",
-      "123 Đường Số 1"
+      "         "
     );
-    expect(user.isValidUser()).toBe(true);
-  });
-
-  // Test case 28: Tên trống, tuổi hợp lệ, giới tính hợp lệ, số điện thoại hợp lệ, địa chỉ hợp lệ => False
-  test("Tên trống, các thông tin khác hợp lệ", () => {
-    const user = new User_Infor("", 30, "Nam", "0123456789", "123 Street");
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 29: Tên hợp lệ, tuổi trống, giới tính hợp lệ, số điện thoại hợp lệ, địa chỉ hợp lệ => False
-  test("Tuổi trống, các thông tin khác hợp lệ", () => {
+  // Check nhiều trường thông tin không hợp lệ
+
+  // Test case 29: User có nhiều trường thông tin không hợp lệ => False
+  test("User có nhiều trường thông tin không hợp lệ", () => {
     const user = new User_Infor(
       "John Doe",
-      null,
-      "Nam",
-      "0123456789",
+      40.5,
+      "Other",
+      "0123456",
       "123 Street"
     );
     expect(user.isValidUser()).toBe(false);
   });
 
-  // Test case 30: Tên hợp lệ, tuổi hợp lệ, giới tính trống, số điện thoại hợp lệ, địa chỉ hợp lệ => False
-  test("Giới tính trống, các thông tin khác hợp lệ", () => {
-    const user = new User_Infor("John Doe", 30, "", "0123456789", "123 Street");
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 31: Tên hợp lệ, tuổi hợp lệ, giới tính hợp lệ, số điện thoại trống, địa chỉ hợp lệ => False
-  test("Số điện thoại trống, các thông tin khác hợp lệ", () => {
-    const user = new User_Infor("John Doe", 30, "Nam", "", "123 Street");
-    expect(user.isValidUser()).toBe(false);
-  });
-
-  // Test case 32: Tên hợp lệ, tuổi hợp lệ, giới tính hợp lệ, số điện thoại hợp lệ, địa chỉ trống => False
-  test("Địa chỉ trống, các thông tin khác hợp lệ", () => {
-    const user = new User_Infor("John Doe", 30, "Nam", "0123456789", "");
+  // Test case 30: User có tất cả trường thông tin không hợp lệ => False
+  test("User có nhiều trường thông tin không hợp lệ", () => {
+    const user = new User_Infor(
+      "John Doe123",
+      40.5,
+      "Other",
+      "0123456",
+      "123 Street@@@"
+    );
     expect(user.isValidUser()).toBe(false);
   });
 });
